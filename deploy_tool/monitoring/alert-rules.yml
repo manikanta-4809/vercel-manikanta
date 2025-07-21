@@ -1,0 +1,11 @@
+groups:
+  - name: InstanceHealthAlerts
+    rules:
+      - alert: NodeExporterDown
+        expr: up{job="node-exporter"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Node Exporter is Down"
+          description: "Node Exporter on instance {{ $labels.instance }} is not reachable."
